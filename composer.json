@@ -21,7 +21,8 @@
         "drupal/core-project-message": "^9.4",
         "drupal/core-recommended": "^9.4",
         "drupal/pathauto": "^1.11",
-        "drupal/search_api": "^1.28"
+        "drupal/search_api": "^1.28",
+        "drupal/search_api_autocomplete": "^1.7"
     },
     "conflict": {
         "drupal/drupal": "*"
