@@ -1,0 +1,41 @@
+uuid: f8cc4332-1563-4ac5-9c0c-9ac095a67e0f
+langcode: en
+status: true
+dependencies:
+  config:
+    - search_api.index.covid_center
+    - views.view.all_covid_center
+  module:
+    - views
+    - search_api_autocomplete
+id: all_covid_center
+label: 'All Covid Center'
+index_id: covid_center
+suggester_settings:
+  live_results:
+    fields: {  }
+    highlight:
+      enabled: false
+      field: ''
+    suggest_keys: false
+    view_modes:
+      'entity:node':
+        covid_center: ''
+  server:
+    fields: {  }
+suggester_weights:
+  live_results: 0
+  server: 0
+suggester_limits: {  }
+search_settings:
+  'views:all_covid_center':
+    displays:
+      default: true
+      selected: {  }
+options:
+  limit: 10
+  min_length: 1
+  show_count: false
+  delay: null
+  submit_button_selector: ':submit'
+  autosubmit: true

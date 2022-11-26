@@ -1,0 +1,22 @@
+uuid: 156075b7-f6df-46f1-87ba-150a7abae7e2
+langcode: en
+status: true
+dependencies:
+  module:
+    - taxonomy
+id: city
+label: City
+type: 'canonical_entities:taxonomy_term'
+pattern: '[term:name]'
+selection_criteria:
+  01b4a1fe-7264-47d8-9f1c-305f2b294a37:
+    id: 'entity_bundle:taxonomy_term'
+    negate: false
+    uuid: 01b4a1fe-7264-47d8-9f1c-305f2b294a37
+    context_mapping:
+      taxonomy_term: taxonomy_term
+    bundles:
+      city: city
+selection_logic: and
+weight: -5
+relationships: {  }
