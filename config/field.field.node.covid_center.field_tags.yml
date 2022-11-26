@@ -1,0 +1,29 @@
+uuid: dc7391b9-c15e-45ee-8529-9f4aed629e91
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_tags
+    - node.type.covid_center
+    - taxonomy.vocabulary.city
+id: node.covid_center.field_tags
+field_name: field_tags
+entity_type: node
+bundle: covid_center
+label: City
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      city: city
+    sort:
+      field: name
+      direction: asc
+    auto_create: true
+    auto_create_bundle: ''
+field_type: entity_reference

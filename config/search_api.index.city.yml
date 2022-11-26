@@ -1,0 +1,51 @@
+uuid: 4b353fd4-0316-4fb2-bc41-79a687d9c6c5
+langcode: en
+status: true
+dependencies:
+  config:
+    - search_api.server.database
+  module:
+    - taxonomy
+    - search_api
+id: city
+name: City
+description: ''
+read_only: false
+field_settings:
+  name:
+    label: Name
+    datasource_id: 'entity:taxonomy_term'
+    property_path: name
+    type: string
+    dependencies:
+      module:
+        - taxonomy
+  url:
+    label: URI
+    property_path: search_api_url
+    type: string
+    configuration:
+      absolute: false
+datasource_settings:
+  'entity:taxonomy_term':
+    bundles:
+      default: false
+      selected:
+        - city
+    languages:
+      default: true
+      selected: {  }
+processor_settings:
+  add_url: {  }
+  aggregated_field: {  }
+  entity_type: {  }
+  language_with_fallback: {  }
+  rendered_item: {  }
+tracker_settings:
+  default:
+    indexing_order: fifo
+options:
+  cron_limit: 50
+  index_directly: true
+  track_changes_in_references: true
+server: database

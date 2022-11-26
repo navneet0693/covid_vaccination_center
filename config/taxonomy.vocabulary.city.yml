@@ -1,0 +1,8 @@
+uuid: 79dc9633-5738-42c1-83a4-679078c8b8ca
+langcode: en
+status: true
+dependencies: {  }
+name: City
+vid: city
+description: 'City for Vaccination Centers'
+weight: 0

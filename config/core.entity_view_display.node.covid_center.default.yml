@@ -4,9 +4,12 @@ status: true
 dependencies:
   config:
     - field.field.node.covid_center.body
+    - field.field.node.covid_center.field_image
     - field.field.node.covid_center.field_registered_users
+    - field.field.node.covid_center.field_tags
     - node.type.covid_center
   module:
+    - image
     - text
     - user
 id: node.covid_center.default
@@ -21,6 +24,17 @@ content:
     third_party_settings: {  }
     weight: 101
     region: content
+  field_image:
+    type: image
+    label: above
+    settings:
+      image_link: ''
+      image_style: ''
+      image_loading:
+        attribute: lazy
+    third_party_settings: {  }
+    weight: 105
+    region: content
   field_registered_users:
     type: entity_reference_label
     label: above
@@ -28,6 +42,14 @@ content:
       link: true
     third_party_settings: {  }
     weight: 103
+    region: content
+  field_tags:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 104
     region: content
   links:
     settings: {  }

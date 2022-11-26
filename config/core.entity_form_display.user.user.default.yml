@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.user.user.field_city
     - field.field.user.user.field_covid_center
     - field.field.user.user.user_picture
     - image.style.thumbnail
@@ -25,6 +26,16 @@ content:
     weight: 4
     region: content
     settings: {  }
+    third_party_settings: {  }
+  field_city:
+    type: entity_reference_autocomplete
+    weight: 2
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
   language:
     weight: 3

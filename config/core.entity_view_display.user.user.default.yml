@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.user.user.field_city
     - field.field.user.user.field_covid_center
     - field.field.user.user.user_picture
     - image.style.thumbnail
@@ -16,6 +17,14 @@ targetEntityType: user
 bundle: user
 mode: default
 content:
+  field_city:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 8
+    region: content
   field_covid_center:
     type: entity_reference_label
     label: hidden

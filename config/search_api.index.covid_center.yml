@@ -3,15 +3,64 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.storage.node.field_tags
     - search_api.server.database
   module:
-    - search_api
+    - taxonomy
     - node
+    - search_api
 id: covid_center
 name: 'Covid Center'
 description: ''
 read_only: false
-field_settings: {  }
+field_settings:
+  name:
+    label: 'City » Taxonomy term » Name'
+    datasource_id: 'entity:node'
+    property_path: 'field_tags:entity:name'
+    type: string
+    dependencies:
+      config:
+        - field.storage.node.field_tags
+      module:
+        - taxonomy
+  node_grants:
+    label: 'Node access information'
+    property_path: search_api_node_grants
+    type: string
+    indexed_locked: true
+    type_locked: true
+    hidden: true
+  rendered_item:
+    label: 'Rendered HTML output'
+    property_path: rendered_item
+    type: text
+    configuration:
+      roles:
+        - anonymous
+      view_mode:
+        'entity:node':
+          covid_center: ''
+  status:
+    label: null
+    datasource_id: 'entity:node'
+    property_path: status
+    type: boolean
+    indexed_locked: true
+    type_locked: true
+    dependencies:
+      module:
+        - node
+  uid:
+    label: null
+    datasource_id: 'entity:node'
+    property_path: uid
+    type: integer
+    indexed_locked: true
+    type_locked: true
+    dependencies:
+      module:
+        - node
 datasource_settings:
   'entity:node':
     bundles:
@@ -24,6 +73,10 @@ datasource_settings:
 processor_settings:
   add_url: {  }
   aggregated_field: {  }
+  content_access:
+    weights:
+      preprocess_query: -30
+  entity_status: {  }
   entity_type: {  }
   language_with_fallback: {  }
   rendered_item: {  }
