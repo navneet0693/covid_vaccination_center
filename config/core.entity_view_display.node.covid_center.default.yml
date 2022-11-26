@@ -1,0 +1,46 @@
+uuid: 5b24f23d-2af8-44b5-8452-527a3db1178c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.covid_center.body
+    - field.field.node.covid_center.field_registered_users
+    - field.field.node.covid_center.field_zone
+    - node.type.covid_center
+  module:
+    - address
+    - text
+    - user
+id: node.covid_center.default
+targetEntityType: node
+bundle: covid_center
+mode: default
+content:
+  body:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  field_registered_users:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 103
+    region: content
+  field_zone:
+    type: address_zone_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 106
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden: {  }

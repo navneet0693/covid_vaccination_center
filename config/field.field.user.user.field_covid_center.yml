@@ -1,0 +1,30 @@
+uuid: ce13e56a-574a-4f2f-9916-a15e2500fedc
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.user.field_covid_center
+    - node.type.covid_center
+  module:
+    - user
+id: user.user.field_covid_center
+field_name: field_covid_center
+entity_type: user
+bundle: user
+label: 'Covid Center'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      covid_center: covid_center
+    sort:
+      field: title
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

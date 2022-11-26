@@ -1,0 +1,34 @@
+uuid: 1964bf71-2c79-4c6f-bee3-62a66265ba2f
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.covid_center.body
+    - field.field.node.covid_center.field_registered_users
+    - field.field.node.covid_center.field_zone
+    - node.type.covid_center
+  module:
+    - text
+    - user
+id: node.covid_center.teaser
+targetEntityType: node
+bundle: covid_center
+mode: teaser
+content:
+  body:
+    type: text_summary_or_trimmed
+    label: hidden
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  field_registered_users: true
+  field_zone: true

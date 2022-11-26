@@ -1,0 +1,22 @@
+uuid: b3da6361-da7c-4149-b58a-6b23cacff876
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: covid_center
+label: 'Covid center'
+type: 'canonical_entities:node'
+pattern: '[node:title]/[node:field_zone]'
+selection_criteria:
+  2a049dbd-10b5-40e0-8d14-238ebd05bc4a:
+    id: 'entity_bundle:node'
+    negate: false
+    uuid: 2a049dbd-10b5-40e0-8d14-238ebd05bc4a
+    context_mapping:
+      node: node
+    bundles:
+      covid_center: covid_center
+selection_logic: and
+weight: -5
+relationships: {  }

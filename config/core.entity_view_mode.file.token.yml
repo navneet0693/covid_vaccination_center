@@ -1,0 +1,10 @@
+uuid: 9187b37c-7250-4c4e-b366-3a0b464f0c60
+langcode: en
+status: true
+dependencies:
+  module:
+    - file
+id: file.token
+label: Token
+targetEntityType: file
+cache: true
