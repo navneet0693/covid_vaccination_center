@@ -1,0 +1,50 @@
+<?php
+
+use Drupal\taxonomy\Entity\Term;
+use Drupal\taxonomy\TermInterface;
+use Drupal\user\Entity\User;
+use Drupal\user\UserInterface;
+use Drupal\views\ViewExecutable;
+
+/**
+ * Implements hook_views_pre_build().
+ */
+function slot_booking_customizations_views_pre_build(ViewExecutable $view) {
+  // Modify contextual filters for 'frontpage' view if the user is
+  // authenticated.
+  // This is done in order to filter the results on the home page.
+  // The results should be filtered on the basis of current users.
+  // @todo: Fix the exclusion of current term ID from results.
+  // @todo: This breaks the exclusion which is set in contextual filter
+  // @todo: in the views 'other_cities'.
+  $account = \Drupal::currentUser();
+  if ($view->id() == 'other_cities'
+    && $view->current_display == 'other_cities'
+    && $account->isAuthenticated()
+  ) {
+    // Let's load the full user entity object.
+    $user = User::load(\Drupal::currentUser()->id());
+    // Check if the above statement has returned a valid object.
+    // Check if the user object has field_city available.
+    // Check if the city field has a value.
+    if ($user instanceof UserInterface
+      && $user->hasField('field_city')
+      && !$user->get('field_city')->isEmpty()
+    ) {
+      // Get the field value.
+      $city = $user->get('field_city')->getValue();
+
+      // Get the term ID.
+      $term_id = $city[0]['target_id'];
+
+      // Load the term object.
+      $term = Term::load($term_id);
+      if ($term instanceof TermInterface ) {
+        // Prepare the argument.
+        $args[0] = $term->getName();
+        // Set the arguments.
+        $view->setArguments($args);
+      }
+    }
+  }
+}
