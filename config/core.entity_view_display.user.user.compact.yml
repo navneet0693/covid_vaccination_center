@@ -5,7 +5,6 @@ dependencies:
   config:
     - core.entity_view_mode.user.compact
     - field.field.user.user.field_covid_center
-    - field.field.user.user.field_location
     - field.field.user.user.user_picture
     - image.style.thumbnail
   module:
@@ -31,5 +30,5 @@ content:
     region: content
 hidden:
   field_covid_center: true
-  field_location: true
   member_for: true
+  search_api_excerpt: true

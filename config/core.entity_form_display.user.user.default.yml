@@ -4,11 +4,9 @@ status: true
 dependencies:
   config:
     - field.field.user.user.field_covid_center
-    - field.field.user.user.field_location
     - field.field.user.user.user_picture
     - image.style.thumbnail
   module:
-    - address
     - image
     - user
 _core:
@@ -27,13 +25,6 @@ content:
     weight: 4
     region: content
     settings: {  }
-    third_party_settings: {  }
-  field_location:
-    type: address_zone_default
-    weight: 2
-    region: content
-    settings:
-      show_label_field: false
     third_party_settings: {  }
   language:
     weight: 3

@@ -5,10 +5,8 @@ dependencies:
   config:
     - field.field.node.covid_center.body
     - field.field.node.covid_center.field_registered_users
-    - field.field.node.covid_center.field_zone
     - node.type.covid_center
   module:
-    - address
     - path
     - text
 id: node.covid_center.default
@@ -41,13 +39,6 @@ content:
       match_limit: 10
       size: 60
       placeholder: ''
-    third_party_settings: {  }
-  field_zone:
-    type: address_zone_default
-    weight: 126
-    region: content
-    settings:
-      show_label_field: false
     third_party_settings: {  }
   path:
     type: path

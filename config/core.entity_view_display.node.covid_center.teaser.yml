@@ -6,7 +6,6 @@ dependencies:
     - core.entity_view_mode.node.teaser
     - field.field.node.covid_center.body
     - field.field.node.covid_center.field_registered_users
-    - field.field.node.covid_center.field_zone
     - node.type.covid_center
   module:
     - text
@@ -31,4 +30,4 @@ content:
     region: content
 hidden:
   field_registered_users: true
-  field_zone: true
+  search_api_excerpt: true
