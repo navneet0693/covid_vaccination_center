@@ -16,12 +16,12 @@
     ],
     "require": {
         "composer/installers": "^1.9",
-        "drupal/address": "^1.11",
         "drupal/admin_toolbar": "^3.2",
         "drupal/core-composer-scaffold": "^9.4",
         "drupal/core-project-message": "^9.4",
         "drupal/core-recommended": "^9.4",
-        "drupal/pathauto": "^1.11"
+        "drupal/pathauto": "^1.11",
+        "drupal/search_api": "^1.28"
     },
     "conflict": {
         "drupal/drupal": "*"

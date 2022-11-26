@@ -1,0 +1,37 @@
+uuid: 4a8c3227-f09c-452d-b9cc-71c2764d2c53
+langcode: en
+status: true
+dependencies:
+  config:
+    - search_api.server.database
+  module:
+    - search_api
+    - node
+id: covid_center
+name: 'Covid Center'
+description: ''
+read_only: false
+field_settings: {  }
+datasource_settings:
+  'entity:node':
+    bundles:
+      default: false
+      selected:
+        - covid_center
+    languages:
+      default: true
+      selected: {  }
+processor_settings:
+  add_url: {  }
+  aggregated_field: {  }
+  entity_type: {  }
+  language_with_fallback: {  }
+  rendered_item: {  }
+tracker_settings:
+  default:
+    indexing_order: fifo
+options:
+  cron_limit: 50
+  index_directly: true
+  track_changes_in_references: true
+server: database
