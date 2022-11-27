@@ -300,6 +300,7 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+      empty: {  }
       arguments:
         nid:
           id: nid
@@ -412,6 +413,7 @@ display:
           separator: ''
           hide_empty: false
       defaults:
+        empty: false
         title: false
         style: false
         row: false
