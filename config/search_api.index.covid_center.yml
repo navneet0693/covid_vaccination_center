@@ -6,8 +6,8 @@ dependencies:
     - field.storage.node.field_tags
     - search_api.server.database
   module:
-    - taxonomy
     - node
+    - taxonomy
     - search_api
 id: covid_center
 name: 'Covid Center'
@@ -18,7 +18,7 @@ field_settings:
     label: 'City » Taxonomy term » Name'
     datasource_id: 'entity:node'
     property_path: 'field_tags:entity:name'
-    type: string
+    type: text
     dependencies:
       config:
         - field.storage.node.field_tags
@@ -42,7 +42,7 @@ field_settings:
         'entity:node':
           covid_center: ''
   status:
-    label: null
+    label: status
     datasource_id: 'entity:node'
     property_path: status
     type: boolean
@@ -52,7 +52,7 @@ field_settings:
       module:
         - node
   uid:
-    label: null
+    label: uid
     datasource_id: 'entity:node'
     property_path: uid
     type: integer

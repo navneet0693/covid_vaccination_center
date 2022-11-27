@@ -13,7 +13,8 @@ label: 'All Covid Center'
 index_id: covid_center
 suggester_settings:
   live_results:
-    fields: {  }
+    fields:
+      - name
     highlight:
       enabled: false
       field: ''
