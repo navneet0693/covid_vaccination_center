@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * @file
+ */
+
 use Drupal\taxonomy\Entity\Term;
 use Drupal\taxonomy\TermInterface;
 use Drupal\user\Entity\User;
@@ -39,7 +43,7 @@ function slot_booking_customizations_views_pre_build(ViewExecutable $view) {
 
       // Load the term object.
       $term = Term::load($term_id);
-      if ($term instanceof TermInterface ) {
+      if ($term instanceof TermInterface) {
         // Prepare the argument.
         $args[0] = $term->getName();
         // Set the arguments.
