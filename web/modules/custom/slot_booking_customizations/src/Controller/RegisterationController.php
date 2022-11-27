@@ -55,9 +55,13 @@ class RegisterationController extends ControllerBase {
 
     // Let's load the internal path of the node in form of node/nid.
     $path = $this->aliasManager->getPathByAlias("/$node_alias[3]");
+    // Check if the path is a node path.
     if (preg_match('/node\/(\d+)/', $path, $matches)) {
+      // Load the node object.
       $node = $this->entityTypeManager->getStorage('node')->load($matches[1]);
       if ($node instanceof NodeInterface) {
+        // Update the 'field_registered_users' by adding the current user ID
+        // to it.
         $node->get('field_registered_users')->appendItem([
           'target_id' => $this->currentUser->id(),
         ]);
@@ -77,6 +81,7 @@ class RegisterationController extends ControllerBase {
         $cache_tags[] = 'config:block.block.registerblock';
         Cache::invalidateTags($cache_tags);
 
+        // Prepare the markup.
         $elem = [
           '#markup' => $this->t('You are are now register in the vaccination center.'),
         ];
@@ -85,11 +90,13 @@ class RegisterationController extends ControllerBase {
         return $response;
       }
     }
+
+    // Otherwise, update the user that there was some problem.
     $elem = [
       '#markup' => $this->t('There was some error in registering your information, please contact site manager.'),
     ];
-
     $response->addCommand(new ReplaceCommand('#register-button-div', $elem));
+
     return $response;
   }
 

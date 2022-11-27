@@ -7,7 +7,10 @@
 use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\node\Entity\Node;
+use Drupal\node\NodeInterface;
 use Drupal\slot_booking_customizations\CovidCenterNodeForm;
+use Drupal\slot_booking_customizations\CovidCenterRegisterForm;
 use Drupal\views\ViewExecutable;
 
 /**
@@ -59,8 +62,7 @@ function slot_booking_customizations_form_views_exposed_form_alter(&$form, FormS
  * Implements hook_entity_type_alter().
  */
 function slot_booking_customizations_entity_type_alter(array &$entity_types) {
-  if (isset($entity_types['node'])
-  ) {
+  if (isset($entity_types['node'])) {
     foreach (['default', 'edit'] as $operation) {
       // We want to customize the add/edit form for covid center.
       // This will help altering slot bookings and field_registered users.
@@ -71,6 +73,11 @@ function slot_booking_customizations_entity_type_alter(array &$entity_types) {
       // @see CovidCenterNodeForm::class.
       $entity_types['node']->setFormClass($operation, CovidCenterNodeForm::class);
     }
+  }
+
+  if (isset($entity_types['user'])) {
+    // @see CovidCenterRegisterForm::class.
+    $entity_types['user']->setFormClass('register', CovidCenterRegisterForm::class);
   }
 }
 
@@ -86,5 +93,69 @@ function slot_booking_customizations_node_view(array &$build, EntityInterface $e
   if ($entity->bundle() == 'covid_center') {
     $display->removeComponent('field_registered_users');
     unset($build["field_registered_users"]);
+  }
+}
+
+/**
+ * Implements hook_entity_presave().
+ */
+function slot_booking_customizations_entity_presave(EntityInterface $entity) {
+  // A site administrator can edit user and change their covid centers.
+  // So, we want to update the references in covid center (both old and new).
+  // Get the user's current city selection.
+
+  // The reason do this in hook is to get the old entity.
+  // We want the old entity to compare the value of changes with
+  // new entity and then update the covid centers.
+  if ($entity->getEntityType()->id() == 'user') {
+    $covid_center = $entity->get('field_covid_center')->getValue();
+    if (!empty($covid_center)) {
+      $node_id = $covid_center[0]['target_id'];
+
+      // Load the node and check if it still exists.
+      if (($node = Node::load($node_id))
+        && $node instanceof NodeInterface) {
+
+        // Get the old user object.
+        $old_user_entity = $entity->original;
+
+        // Extract the old covid center ID (node ID).
+        $old_value = $old_user_entity->get('field_covid_center')->getValue();
+
+        // Compare the old and new values.
+        // If they have changed then take actions.
+        if (!empty($old_nid = $old_value[0]['target_id'])
+          && $node_id != $old_nid
+        ) {
+          // Update the 'field_registered_users' by adding the current user ID
+          // to new covid center.
+          $user_ids = $node->get('field_registered_users')->getValue();
+          $ids = array_filter(array_column($user_ids, 'target_id'));
+          if (!in_array($entity->id(), $ids)) {
+            $node->get('field_registered_users')->appendItem([
+              'target_id' => $entity->id(),
+            ]);
+            $node->save();
+          }
+
+          // We also have to remove the user reference from old covid center.
+          if (($old_node = Node::load($old_nid)) instanceof NodeInterface) {
+            // Update the 'field_registered_users' by adding the current user ID
+            // to it.
+            $field = $old_node->get('field_registered_users');
+            $user_ids = $field->getValue();
+
+            // Get the index to remove.
+            $index_to_remove = array_search($entity->id(), array_column($user_ids, 'target_id'));
+
+            // Actually remove the item.
+            $field->removeItem($index_to_remove);
+
+            // Finally save the old node.
+            $old_node->save();
+          }
+        }
+      }
+    }
   }
 }
