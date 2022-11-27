@@ -26,5 +26,5 @@ settings:
 visibility:
   request_path:
     id: request_path
-    negate: true
-    pages: /all-covid-centres
+    negate: false
+    pages: "/taxonomy/*\r\n<front>"

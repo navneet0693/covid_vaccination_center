@@ -1,0 +1,4 @@
+services:
+  slot_booking_customizations.helper:
+    class: Drupal\slot_booking_customizations\SlotBookingCustomizationHelper
+    arguments: ['@current_user', '@entity_type.manager']
