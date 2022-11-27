@@ -466,6 +466,7 @@ display:
       display_description: ''
       display_extenders: {  }
       block_description: 'Other Centers'
+      block_hide_empty: true
       allow:
         items_per_page: false
     cache_metadata:

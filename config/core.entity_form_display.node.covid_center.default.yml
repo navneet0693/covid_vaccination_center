@@ -12,6 +12,7 @@ dependencies:
     - node.type.covid_center
   module:
     - image
+    - slot_booking_customizations
     - text
 id: node.covid_center.default
 targetEntityType: node
@@ -45,7 +46,7 @@ content:
       preview_image_style: thumbnail
     third_party_settings: {  }
   field_registered_users:
-    type: entity_reference_autocomplete
+    type: no_duplicate_entity_reference_autocomplete
     weight: 5
     region: content
     settings:
