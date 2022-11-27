@@ -1,4 +1,4 @@
-uuid: 9d9b4ded-7c84-4a56-ba8c-40b82cbf4eef
+uuid: fa4618c2-61c1-4f17-b01a-fde17f1b954b
 langcode: en
 status: true
 dependencies:
@@ -10,7 +10,7 @@ dependencies:
 id: registerblock
 theme: olivero
 region: sidebar
-weight: -7
+weight: -8
 provider: null
 plugin: register_block
 settings:
@@ -18,6 +18,9 @@ settings:
   label: 'Register Block'
   label_display: '0'
   provider: slot_booking_customizations
+  context_mapping:
+    node: '@node.node_route_context:node'
+    user: '@user.current_user_context:current_user'
 visibility:
   'entity_bundle:node':
     id: 'entity_bundle:node'
