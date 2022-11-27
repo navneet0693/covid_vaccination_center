@@ -12,7 +12,7 @@ dependencies:
 id: views_block__other_cities_other_cities
 theme: olivero
 region: sidebar
-weight: 0
+weight: -6
 provider: null
 plugin: 'views_block:other_cities-other_cities'
 settings:

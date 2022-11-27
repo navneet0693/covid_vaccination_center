@@ -1,0 +1,28 @@
+uuid: 9d9b4ded-7c84-4a56-ba8c-40b82cbf4eef
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - slot_booking_customizations
+  theme:
+    - olivero
+id: registerblock
+theme: olivero
+region: sidebar
+weight: -7
+provider: null
+plugin: register_block
+settings:
+  id: register_block
+  label: 'Register Block'
+  label_display: '0'
+  provider: slot_booking_customizations
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+    bundles:
+      covid_center: covid_center
