@@ -3,4 +3,4 @@ slot_booking_customizations.register:
   defaults:
     _controller: '\Drupal\slot_booking_customizations\Controller\RegisterationController::registerUser'
   requirements:
-    _permission: 'access content'
+    _role: 'authenticated'
