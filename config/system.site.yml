@@ -6,7 +6,7 @@ name: 'Selectra - Covid Vaccination Center'
 mail: admin@example.com
 slogan: ''
 page:
-  403: ''
+  403: /node/36
   404: ''
   front: /node
 admin_compact_mode: false

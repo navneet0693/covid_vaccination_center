@@ -7,6 +7,7 @@ dependencies:
     - field.storage.node.field_tags
     - search_api.index.covid_center
     - system.menu.main
+    - user.role.authenticated
   module:
     - search_api
     - text
@@ -393,9 +394,10 @@ display:
           sort_asc_label: Asc
           sort_desc_label: Desc
       access:
-        type: perm
+        type: role
         options:
-          perm: 'access content'
+          role:
+            authenticated: authenticated
       cache:
         type: search_api_tag
         options: {  }
@@ -503,7 +505,7 @@ display:
         - 'languages:language_interface'
         - url
         - 'user.node_grants:view'
-        - user.permissions
+        - user.roles
       tags:
         - 'config:field.storage.node.body'
         - 'config:field.storage.node.field_tags'
@@ -531,7 +533,7 @@ display:
         - 'languages:language_interface'
         - url
         - 'user.node_grants:view'
-        - user.permissions
+        - user.roles
       tags:
         - 'config:field.storage.node.body'
         - 'config:field.storage.node.field_tags'

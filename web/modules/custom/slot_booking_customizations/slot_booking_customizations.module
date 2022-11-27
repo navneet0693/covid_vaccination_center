@@ -76,6 +76,7 @@ function slot_booking_customizations_entity_type_alter(array &$entity_types) {
   }
 
   if (isset($entity_types['user'])) {
+    // We want to customize the register form for user as well.
     // @see CovidCenterRegisterForm::class.
     $entity_types['user']->setFormClass('register', CovidCenterRegisterForm::class);
   }
