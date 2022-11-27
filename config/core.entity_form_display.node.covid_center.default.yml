@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.node.covid_center.body
+    - field.field.node.covid_center.field_available_slots
     - field.field.node.covid_center.field_image
     - field.field.node.covid_center.field_registered_users
     - field.field.node.covid_center.field_tags
@@ -27,6 +28,14 @@ content:
       placeholder: ''
       show_summary: false
     third_party_settings: {  }
+  field_available_slots:
+    type: string_textfield
+    weight: 4
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
   field_image:
     type: image_image
     weight: 2
@@ -37,7 +46,7 @@ content:
     third_party_settings: {  }
   field_registered_users:
     type: entity_reference_autocomplete
-    weight: 4
+    weight: 5
     region: content
     settings:
       match_operator: CONTAINS
@@ -57,7 +66,7 @@ content:
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 5
+    weight: 6
     region: content
     settings:
       display_label: true

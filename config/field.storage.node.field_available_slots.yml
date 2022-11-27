@@ -1,19 +1,20 @@
-uuid: 34bbff4c-414c-48d8-8ab7-c17d58d83ac4
+uuid: 26e698f5-6b96-4a8b-99cd-b7c8b5770d5b
 langcode: en
 status: true
 dependencies:
   module:
     - node
-    - user
-id: node.field_registered_users
-field_name: field_registered_users
+id: node.field_available_slots
+field_name: field_available_slots
 entity_type: node
-type: entity_reference
+type: string
 settings:
-  target_type: user
+  max_length: 255
+  case_sensitive: false
+  is_ascii: false
 module: core
 locked: false
-cardinality: -1
+cardinality: 1
 translatable: true
 indexes: {  }
 persist_with_no_fields: false
