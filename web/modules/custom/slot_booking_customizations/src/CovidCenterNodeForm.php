@@ -36,9 +36,8 @@ class CovidCenterNodeForm extends NodeForm {
       // Get the available slots for this covid center.
       $available_slots = $form_state->getValue('field_available_slots')[0]['value'];
       // Count the number of registered users as of now.
-      $count = count(array_column($form_state->getValue('field_registered_users'), 'target_id'));
-      // Even though we have removed the 'add more' button in self::form() above,
-      // we want to check if the registered users are more than available slot.
+      $count = count(array_filter(array_column($form_state->getValue('field_registered_users'), 'target_id')));
+      // We want to check if the registered users are more than available slot.
       // If it is, we want to throw an error.
       if ($count > $available_slots) {
         $form_state->setErrorByName('field_registered_users',
