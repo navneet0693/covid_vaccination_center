@@ -5,6 +5,7 @@
  */
 
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\slot_booking_customizations\CovidCenterNodeForm;
 use Drupal\taxonomy\Entity\Term;
 use Drupal\taxonomy\TermInterface;
 use Drupal\user\Entity\User;
@@ -66,5 +67,24 @@ function slot_booking_customizations_form_views_exposed_form_alter(&$form, FormS
   // Let's unset that action from the form.
   if ($form['#id'] === 'views-exposed-form-all-covid-center-all-covid-centers') {
     unset($form['actions']);
+  }
+}
+
+/**
+ * Implements hook_entity_type_alter().
+ */
+function slot_booking_customizations_entity_type_alter(array &$entity_types) {
+  if (isset($entity_types['node'])
+  ) {
+    foreach (['default', 'edit'] as $operation) {
+      // We want to customize the add/edit form for covid center.
+      // This will help altering slot bookings and field_registered users.
+      // Important: Please note that it is not possible change the NodeForm
+      // as per bundle. So, we are doing it for whole Node entity type.
+      // We are limiting the further processing in the CovidCenterNodeForm
+      // itself.
+      // @see CovidCenterNodeForm::class.
+      $entity_types['node']->setFormClass($operation, CovidCenterNodeForm::class);
+    }
   }
 }
