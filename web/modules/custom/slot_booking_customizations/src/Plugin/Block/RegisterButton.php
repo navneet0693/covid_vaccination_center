@@ -49,9 +49,11 @@ class RegisterButton extends BlockBase {
       ];
     }
     else {
-      // User can only register in it's own city.
+      // User can only register in its own city.
       // Check if the current covid centers city is same as current user city.
-      if ($this->checkUserCity()) {
+      if ($this->checkUserCity()
+      && $this->checkSlotAvailability()
+      ) {
         // User is not registered and present it with a registration link.
         // We build the AJAX link.
         $build['ajax_link']['link'] = [
@@ -95,14 +97,12 @@ class RegisterButton extends BlockBase {
   private function checkStatus(): bool {
     // Get the user object from context.
     $user = $this->getContextValue('user');
-    // Check if the current user is authenticated.
     // Proceed only if we get the genuine user entity.
     if ($user instanceof UserInterface) {
       // Get the node object.
       $node = $this->getContextValue('node');
-      // Check if the route object is a valid Node object.
       // Only proceed if the node bundle is 'covid_center' and
-      // current users has the registered.
+      // current users doesn't have registered to any covid centers.
       if ($node instanceof NodeInterface
         && ($node->bundle() === 'covid_center')
         && !$user->get('field_covid_center')->isEmpty()
@@ -135,14 +135,12 @@ class RegisterButton extends BlockBase {
   private function checkUserCity(): bool {
     // Get the user object from context.
     $user = $this->getContextValue('user');
-    // Check if the current user is authenticated.
     // Proceed only if we get the genuine user entity.
     if ($user instanceof UserInterface) {
       // Get the node object.
       $node = $this->getContextValue('node');
-      // Check if the route object is a valid Node object.
       // Only proceed if the node bundle is 'covid_center' and
-      // current users has the registered.
+      // current users has the city filled.
       if ($node instanceof NodeInterface
         && ($node->bundle() === 'covid_center')
         && ($node->hasField('field_tags'))
@@ -163,6 +161,41 @@ class RegisterButton extends BlockBase {
     // Otherwise, user has not registered.
     return FALSE;
 
+  }
+
+  /**
+   * Check the available slot on the current node.
+   *
+   * @return bool
+   *   TRUE if the number of registered users are less than available slots,
+   *   FALSE otherwise.
+   *
+   * @throws \Drupal\Component\Plugin\Exception\ContextException
+   */
+  private function checkSlotAvailability() {
+    // Get the node object.
+    $node = $this->getContextValue('node');
+    // Only proceed if the node bundle is 'covid_center' and has a value in
+    // field_available_slots field.
+    if ($node instanceof NodeInterface
+      && ($node->bundle() === 'covid_center')
+      && $node->hasField('field_available_slots')
+      && !$node->get('field_available_slots')->isEmpty()
+      && !$node->get('field_registered_users')->isEmpty()
+    ) {
+      // Get the value of available slots.
+      $available_slots = $node->get('field_available_slots')->getValue()[0]['value'];
+
+      // Get the count of registered users.
+      $count = count(array_column($node->get('field_registered_users')->getValue(), 'target_id'));
+
+      // Check if the count is less than available slots.d
+      if ($count < $available_slots) {
+        return TRUE;
+      }
+    }
+    // Slots are full and no booking should be accepted.
+    return FALSE;
   }
 
   /**
